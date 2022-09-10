@@ -1,25 +1,43 @@
+import React, { useState } from 'react';
 import { StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
 import { BackArrow } from '../../assets/SVG';
 
-const SetLocaleScreen = ({navigation}) => {
+const SetLocaleScreen = ({navigation, route}) => {
+
+  const [userInfo, setUserInfo] = useState(
+    { 
+      'phoneNumber': route.params.phoneNumber,
+      'phoneNumberFormat': route.params.phoneNumberFormat,
+    }
+  );
+
+  const unformatPhoneNumber = (value) => {
+    if (!value) return value;
+    const phoneNumber = value.replace(/\D+/g, '')
+
+    return phoneNumber;
+  }
+  
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.backArrow} onPress={() => navigation.navigate('Password')}>
+      <TouchableOpacity style={styles.backArrow} onPress={() => navigation.navigate('Password', {phoneNumber: unformatPhoneNumber(userInfo.phoneNumber), phoneNumberFormat: userInfo.phoneNumberFormat})}>
         <BackArrow/>
       </TouchableOpacity>
 
-      <Text style={styles.H2}>Do you want to set your home location?</Text>
-      <Text style={styles.H4}>We’ll use this information to disable any pending alarms if you happen to arrive home early.</Text>
+      <View style={styles.verticalContainer}>
+        <Text style={styles.H2}>Do you want to set your home location?</Text>
+        <Text style={styles.H4}>We’ll use this information to disable any pending alarms if you happen to arrive home early.</Text>
 
-      <View style={styles.switchContainer}>
-        <Text style={styles.switchContainer.H4}>Home detection</Text>
-        <Switch/>
+        <View style={styles.switchContainer}>
+          <Text style={styles.switchContainer.H4}>Home detection</Text>
+          <Switch/>
+        </View>
+      
+        <Text style={styles.H4}>Psst, you can disable this feature in your profile.</Text>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.button.H3}>Continue</Text>
+        </TouchableOpacity>
       </View>
-     
-      <Text style={styles.H4}>Psst, you can disable this feature in your profile.</Text>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.button.H3}>Continue</Text>
-      </TouchableOpacity>
     </View>
   )
 }
@@ -36,7 +54,7 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     fontFamily: 'CormorantGaramond_700Bold',
     lineHeight: 49,
-    marginTop: 43
+    // marginTop: 43
   },
   H3: {
     fontSize: 20,
@@ -49,7 +67,7 @@ const styles = StyleSheet.create({
     color: '#C5C8CF',
     fontFamily: 'Roboto_400Regular',
     lineHeight: 26,
-    marginTop: 22,
+    // marginTop: 22,
   },
   container: {
     height: '100%',
@@ -58,25 +76,34 @@ const styles = StyleSheet.create({
     paddingTop: 65,
     backgroundColor: '#222831',
   },
+  verticalContainer: {
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    height: '70%'
+  },
   button: {
     backgroundColor: '#00ADB5',
     borderRadius: 30,
     paddingHorizontal: 100,
     paddingVertical: 15,
-    marginTop: 52,
+    // marginTop: 52,
     H3: {
         fontSize: 20,
         textAlign: 'center',
         color: '#ffffff',
+        fontFamily: 'Lora_700Bold'
     }
   },
   backArrow: {
-    marginTop: 65,
+    position: 'absolute',
+    top: 65,
+    left: 31,
+    zIndex: 10
   },
   switchContainer: {
     flexDirection: 'row',
-    marginTop: 72,
-    marginBottom: 63,
+    // marginTop: 72,
+    // marginBottom: 63,
     justifyContent: 'center',
     H4: {
       fontSize: 16,

@@ -1,71 +1,97 @@
-import React, { useCallback, useState } from 'react';
-import { FormInput, GoogleAuth } from '../../components';
-import { StyleSheet, TextInput, Text, TouchableOpacity, View } from 'react-native';
+import React, { useState } from 'react';
+import { GoogleAuth } from '../../components';
+import { StyleSheet, TextInput, Text, TouchableOpacity, TouchableWithoutFeedback, Keyboard, View } from 'react-native';
 import { AppleLogo, GithubLogo, FacebookLogo, BackArrow } from '../../assets/SVG';
-
 
 const SignUpScreen = ({navigation}) => {
   const [userInfo, setUserInfo] = useState(
     { 
       'phoneNumber': '',
+      'phoneNumberFormat': ''
     }
   );
 
+  const formatPhoneNumber = (value) => {
+    if (!value) return value;
+
+    const phoneNumber = value.replace(/[^\d]/g, '');
+    const phoneNumberLength = phoneNumber.length;
+    if (phoneNumberLength < 4) return phoneNumber;
+    if (phoneNumberLength < 7) {
+      return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;s
+    }
+    return `(${phoneNumber.slice(0,3)}) ${phoneNumber.slice(3,6)} ${phoneNumber.slice(6,10)}`
+  }
+
+  const unformatPhoneNumber = (value) => {
+    if (!value) return value;
+    const phoneNumber = value.replace(/\D+/g, '')
+
+    return phoneNumber
+  }
+
   return (
-    <View style={styles.container}>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.container}>
 
-      <TouchableOpacity style={styles.backArrow} onPress={() => navigation.navigate('Welcome')}>
-        <BackArrow/>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.backArrow} onPress={() => navigation.navigate('Welcome')}>
+          <BackArrow/>
+        </TouchableOpacity>
 
-      <Text style={styles.H2}>Get Started</Text>
-      <View style={styles.inputBorder}>
-        <TextInput 
-          style={styles.inputBorder.H4}
-          placeholder='Phone number'
-          onChangeText={(text) => setUserInfo({...userInfo, 'phoneNumber': text})}
-          value={userInfo.phoneNumber}
-          placeholderTextColor='#C5C8CF'
-        />
-      </View>
+        <View style={styles.verticalContainer}>
+          <Text style={styles.H2}>Get Started</Text>
+          <View style={styles.inputBorder}>
+            <TextInput 
+              style={styles.inputBorder.H4}
+              placeholder='Phone number'
+              onChangeText={(number) => {
+                setUserInfo({...userInfo, 'phoneNumberFormat': formatPhoneNumber(number), 'phoneNumber': unformatPhoneNumber(number)})
+              }}
+              value={userInfo.phoneNumberFormat}
+              placeholderTextColor='#C5C8CF'
+            />
+          </View>
 
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Authentication')}>
-        <Text 
-          style={styles.button.H3}
-        >
-            Continue
-        </Text>
-      </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => userInfo.phoneNumber.length === 10 ? navigation.navigate('Authentication', {phoneNumber: unformatPhoneNumber(userInfo.phoneNumber), phoneNumberFormat: userInfo.phoneNumberFormat}) : null}>
+            <Text 
+              style={styles.button.H3}
+            >
+                Continue
+            </Text>
+          </TouchableOpacity>
 
-      <View>
-        <View style={styles.divider}>
-          <Text style={styles.divider.H4}>or sign in with</Text>
+          <View>
+            <View style={styles.divider}>
+              <Text style={styles.divider.H4}>or sign in with</Text>
+            </View>
+          </View>
+
+          <View style={styles.socialContainer}>
+            <TouchableOpacity style={styles.socialContainer.icon}>
+              <AppleLogo/>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.socialContainer.icon}>
+              <GithubLogo/>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <GoogleAuth style={styles.socialContainer.icon} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.socialContainer.icon}>
+              <FacebookLogo/>
+            </TouchableOpacity>
+          </View>
+
+          <View style={styles.alreadyRegistered}>
+            <Text style={styles.alreadyRegistered.H4}>
+              Already have an account? 
+            </Text>
+            <Text style={styles.alreadyRegistered.H4ul}> Sign in!</Text>
+          </View>
+
         </View>
+        
       </View>
-
-      <View style={styles.socialContainer}>
-        <TouchableOpacity style={styles.socialContainer.icon}>
-          <AppleLogo/>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.socialContainer.icon}>
-          <GithubLogo/>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <GoogleAuth style={styles.socialContainer.icon} />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.socialContainer.icon}>
-          <FacebookLogo/>
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.alreadyRegistered}>
-        <Text style={styles.alreadyRegistered.H4}>
-          Already have an account? 
-        </Text>
-        <Text style={styles.alreadyRegistered.H4ul}> Sign in!</Text>
-      </View>
-      
-    </View>
+    </TouchableWithoutFeedback>
   )
 }
 
@@ -82,7 +108,6 @@ const styles = StyleSheet.create({
       fontFamily: 'CormorantGaramond_700Bold',
       lineHeight: 49,
       textAlign: 'center',
-      marginTop: 54,
   },
   H3: {
       fontSize: 20,
@@ -108,7 +133,6 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     paddingHorizontal: 100,
     paddingVertical: 15,
-    marginTop: 52,
     H3: {
         fontSize: 20,
         textAlign: 'center',
@@ -120,16 +144,25 @@ const styles = StyleSheet.create({
     height: '100%',
     padding: 36.5,
     backgroundColor: '#222831',
-    paddingTop: 65
+    paddingTop: 65,
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+  },
+  verticalContainer: {
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    height: '80%',
   },
   backArrow: {
-    marginTop: 65,
+    position: 'absolute',
+    top: 65,
+    left: 31,
+    zIndex: 10
   },
   inputBorder: {
     borderBottomColor: '#ffffff',
     borderBottomWidth: 1,
     paddingBottom: 9,
-    marginTop: 50,
     H4: {
       fontSize: 16,
       color: '#ffffff',
@@ -138,7 +171,6 @@ const styles = StyleSheet.create({
   divider: {
     borderBottomColor: '#ffffff',
     borderBottomWidth: 1,
-    marginTop: 40,
     flexDirection: "row",
     justifyContent: "center",
     H4: {
@@ -155,7 +187,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     display: 'flex',
     flexDirection: 'row',
-    marginTop: 40,
     icon: {
       width: 50,
       height: 50,
@@ -168,15 +199,14 @@ const styles = StyleSheet.create({
   alreadyRegistered: {
     flexDirection: "row",
     justifyContent: "center",
-    marginTop: 40,
     H4: {
-      //fontFamily: 'Roboto_400Regular',
       fontSize: 16,
       color: '#ffffff',
       textAlign: 'center',
+      fontFamily: 'Roboto_400Regular',
     },
     H4ul: {
-      //fontFamily: 'Roboto_400Regular',
+      fontFamily: 'Roboto_400Regular',
       color: '#ffffff',
       fontSize: 16,
       textDecorationLine: 'underline',

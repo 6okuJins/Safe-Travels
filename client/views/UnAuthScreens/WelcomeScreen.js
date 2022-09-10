@@ -8,8 +8,10 @@ const WelcomeScreen = ({navigation}) => {
             <View style={styles.container.sharedPadding}>
                 <LogoLarge style={styles.logo}/>
 
-                <Text style={styles.H4}>Travel Safely</Text>
-                <Text style={styles.H1}>Your Device is more than just a brick. 🧱</Text>
+                <View>
+                    <Text style={styles.H4}>Travel Safely</Text>
+                    <Text style={styles.H1}>Your Device is more than just a brick. 🧱</Text>
+                </View>
 
                 <TouchableOpacity 
                     style={styles.button}
@@ -48,7 +50,7 @@ const styles = StyleSheet.create({
         color: '#BEBEBE',
         fontFamily: 'Roboto_400Regular',
         lineHeight: 26,
-        marginTop: 191
+        // marginTop: 191
     },
     container: {
         height: '100%',
@@ -57,6 +59,9 @@ const styles = StyleSheet.create({
             paddingLeft: 31,
             paddingRight: 22,
             paddingTop: 65,
+            flexDirection: 'column',
+            justifyContent: 'space-evenly',
+            height: '100%'
         }
     },
     button: {
@@ -64,7 +69,7 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         paddingHorizontal: 100,
         paddingVertical: 15,
-        marginTop: 200,
+        // marginTop: 200,
         H3: {
             fontSize: 20,
             textAlign: 'center',
