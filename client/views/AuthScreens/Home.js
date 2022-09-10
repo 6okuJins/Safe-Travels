@@ -1,6 +1,6 @@
 // import { DatePicker } from '../../components';
 import { View, Text, Button, StyleSheet } from 'react-native';
-import { Carousel, SearchBar, PlusButton } from '../../components';
+import { Carousel, SearchBar, PlusButton, AddTripModal} from '../../components';
 import { useState } from 'react';
 const example = [
   {
@@ -10,6 +10,7 @@ const example = [
 ]
 const Home = ({ navigation }) => {
   const [ trips, setTrips ] = useState(example);
+  const [ ModalOpen, setModalOpen ] = useState(false);
   return (
     <View style={style.container}>
       <Text style={style.H2}>Hello!</Text>
@@ -18,10 +19,11 @@ const Home = ({ navigation }) => {
       
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <Text style={style.H2}>Scheduled Trips</Text>
-        {/* TEST BUTTON ADDS ANOTHER EXAMPLE */}
-        <PlusButton onPress={()=> setTrips((prev) => [...prev, ...example])}/>
+        {/* OPENS MODAL */}
+        <PlusButton onPress={()=> setModalOpen(true)}/>
       </View>
       <Carousel carouselItems={trips}/>
+      <AddTripModal ModalOpen={ModalOpen} setModalOpen={setModalOpen} setTrips={setTrips}/>
     </View>
   )
 }

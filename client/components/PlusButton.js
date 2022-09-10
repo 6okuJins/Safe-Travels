@@ -5,7 +5,7 @@ export default function PlusButton({onPress}) {
     <TouchableOpacity style={{
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: '#00ADB5',
+      backgroundColor: '#393E46',
       borderRadius: 9999, width: 30,
       height: 30, marginHorizontal: 10
       }}
