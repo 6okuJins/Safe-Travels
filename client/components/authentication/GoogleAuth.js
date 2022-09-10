@@ -14,6 +14,7 @@ export default function GoogleAuth(prop) {
   const [request, response, promptAsync] = Google.useAuthRequest({
     expoClientId: '361694339981-icrleur8bamhs1dk4afubtf9qvq14866.apps.googleusercontent.com',
     webClientId: '361694339981-mpe0ccstnj1c9qh2ngk0l1lmq08f9v7n.apps.googleusercontent.com',
+    prompt: 'login',
   });
 // <THIS IS POG>
   useEffect(() => {
@@ -22,7 +23,7 @@ export default function GoogleAuth(prop) {
       setAccessToken(() => authentication.accessToken );
     }
   }, [response]);
-  
+  // Need to wait on accessToken to change before passing to api because useState is asynchronous
   useEffect(() => {
     async function getUserInfo() {
       const userInfo = await fetch('https://www.googleapis.com/userinfo/v2/me', {
