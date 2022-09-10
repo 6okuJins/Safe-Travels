@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Image, View, Platform } from 'react-native';
+import { TouchableOpacity, Text} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 
 export default function ImagePickerExample({ setImage }) {
@@ -20,8 +19,8 @@ export default function ImagePickerExample({ setImage }) {
   };
 
   return (
-    <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-      <Button title="Pick an image from camera roll" onPress={pickImage} />
-    </View>
+    <TouchableOpacity onPress={pickImage} style={{backgroundColor: 'white', borderRadius: 15, padding: 10, justifyContent: 'center', alignItems: 'center'}}>
+      <Text>Choose an image</Text>
+    </TouchableOpacity>
   );
 }
