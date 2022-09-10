@@ -3,51 +3,62 @@ import { Text, View, SafeAreaView, TouchableOpacity, Image } from 'react-native'
 
 import SnapCarousel from 'react-native-snap-carousel';
 
-const exampleItems = [
-  {
-    title: 'Item 1',
-    text: 'Text 1',
-  },
-  {
-    title: 'Item 2',
-    text: 'Text 2',
-  },
-  {
-    title: 'Item 3',
-    text: 'Text 3',
-  },
-  {
-    title: 'Item 4',
-    text: 'Text 4',
-  },
-  {
-    title: 'Item 5',
-    text: 'Text 5',
-  },
-];
+// const exampleItems = [
+//   {
+//     title: 'Item 1',
+//     text: 'Text 1',
+//   },
+//   {
+//     title: 'Item 2',
+//     text: 'Text 2',
+//   },
+//   {
+//     title: 'Item 3',
+//     text: 'Text 3',
+//   },
+//   {
+//     title: 'Item 4',
+//     text: 'Text 4',
+//   },
+//   {
+//     title: 'Item 5',
+//     text: 'Text 5',
+//   },
+// ];
 
-const Carousel = ({image, color}) => {
+const Carousel = ({carouselItems}) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [carouselItems, setCarouselItems] = useState(exampleItems);
+  //const [carouselItems, setCarouselItems] = useState(exampleItems);
   const ref = useRef(null);
 
   const renderItem = useCallback(({ item, index }) => (
     <TouchableOpacity
       onPress={()=> console.log('carousel item pressed')}
       style={{
-        backgroundColor: color,
+        justifyContent: 'space-between',
+        alignItems: 'flex-start',
+        backgroundColor: '#393E46',
         borderRadius: 25,
         height: 300,
-        padding: 50,
+        padding: 20,
         width: 250,
-        overflow: false,
+        overflow: 'hidden',
       }}
     >
-      {image && <Image source={{uri: image }} style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0}}/>}
-      <Text style={{ fontSize: 30 }}>{item.title}</Text>
-      <Text>{item.text}</Text>
+      {console.log(carouselItems)}
+      {item?.image && <Image source={{uri: item.image }} style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0}}/>}
+      <View>
+        <Text style={{color: 'white'}}>{index + 1} / {carouselItems.length}</Text>
+      </View>
+      <View style={{
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        borderRadius: 20,
+        paddingHorizontal: 15,
+      }}>
+        <Text style={{color: 'white', fontSize: 30 }}>{item.destination}</Text>
+      </View>
     </TouchableOpacity>
-  ), [image]);
+  ), [carouselItems]);
 
   return (
       <View style={{ flexDirection: 'row', justifyContent: 'center', height: 300}}>

@@ -1,12 +1,15 @@
 // import { DatePicker } from '../../components';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { Carousel, SearchBar, PlusButton } from '../../components';
-
+import { useState } from 'react';
 const example = [
-  {}
+  {
+    destination: 'Toronto',
+    image: 'file:///var/mobile/Containers/Data/Application/98750671-C001-4E05-8410-708BCCC55632/Library/Caches/ExponentExperienceData/%2540mdom%252Fsafe-travels/ImagePicker/78F1B7C2-1B08-4DD5-BC67-E084505690BE.jpg',
+  }
 ]
 const Home = ({ navigation }) => {
-
+  const [ trips, setTrips ] = useState(example);
   return (
     <View style={style.container}>
       <Text style={style.H2}>Hello!</Text>
@@ -15,9 +18,10 @@ const Home = ({ navigation }) => {
       
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <Text style={style.H2}>Scheduled Trips</Text>
-        <PlusButton/>
+        {/* TEST BUTTON ADDS ANOTHER EXAMPLE */}
+        <PlusButton onPress={()=> setTrips((prev) => [...prev, ...example])}/>
       </View>
-      <Carousel/>
+      <Carousel carouselItems={trips}/>
     </View>
   )
 }

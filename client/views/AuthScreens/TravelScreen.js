@@ -1,16 +1,22 @@
 import {View, Text, StyleSheet, Button } from 'react-native';
 import { ImagePickerButton, Carousel } from '../../components';
 import { useState, useEffect } from 'react';
+
+
+const example = [
+  {
+    destination: 'Toronto',
+    image: 'file:///var/mobile/Containers/Data/Application/98750671-C001-4E05-8410-708BCCC55632/Library/Caches/ExponentExperienceData/%2540mdom%252Fsafe-travels/ImagePicker/78F1B7C2-1B08-4DD5-BC67-E084505690BE.jpg',
+  }
+]
 export default function TravelScreen() {
   const [ image, setImage ] = useState();
   const [ color, setColor ] = useState();
-  useEffect(()=> {
-    console.log(image);
-  },[image])
+
   return (
     <View style={style.container}>
       <Text>TRAVEL</Text>
-      <Carousel image={image} color={color}/>
+      <Carousel carouselItems={example}/>
       <ImagePickerButton setImage={setImage}/>
       <Button
       title='Change color'
