@@ -4,3 +4,5 @@ export { default as Form } from './Form';
 export { default as FormInput } from './FormInput';
 export { default as GoogleAuth } from './authentication/GoogleAuth';
 export { default as Carousel } from './Carousel';
+export { default as SearchBar } from './SearchBar';
+export { default as ImagePickerButton } from './ImagePickerButton';

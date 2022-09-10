@@ -30,6 +30,14 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow Safe Travels to access your photos"
+        }
+      ]
+    ]
   }
 }

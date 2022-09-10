@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useRef } from 'react';
-import { Text, View, SafeAreaView, TouchableOpacity} from 'react-native';
+import { Text, View, SafeAreaView, TouchableOpacity, Image } from 'react-native';
 
 import SnapCarousel from 'react-native-snap-carousel';
 
@@ -26,7 +26,7 @@ const exampleItems = [
   },
 ];
 
-const Carousel = () => {
+const Carousel = ({image, color}) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [carouselItems, setCarouselItems] = useState(exampleItems);
   const ref = useRef(null);
@@ -35,24 +35,24 @@ const Carousel = () => {
     <TouchableOpacity
       onPress={()=> console.log('carousel item pressed')}
       style={{
-        backgroundColor: '#ff0000',
-        borderRadius: 5,
-        height: 250,
+        backgroundColor: color,
+        borderRadius: 25,
+        height: 300,
         padding: 50,
-        marginLeft: 25,
-        marginRight: 25,
+        width: 250,
       }}
     >
+      {image && <Image source={{uri: image }} style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0}}/>}
       <Text style={{ fontSize: 30 }}>{item.title}</Text>
       <Text>{item.text}</Text>
     </TouchableOpacity>
-  ), []);
+  ), [image]);
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#0000FF', paddingTop: 25 }}>
-      <View style={{ flexDirection: 'row', justifyContent: 'center', height: 400}}>
+      <View style={{ flexDirection: 'row', justifyContent: 'center', height: 300}}>
         <SnapCarousel
-          layout="default"
+         
+          layout="stack"
           ref={ref}
           data={carouselItems}
           sliderWidth={300}
@@ -61,7 +61,6 @@ const Carousel = () => {
           onSnapToItem={(index) => setActiveIndex(index)}
         />
       </View>
-    </SafeAreaView>
   );
 };
 
