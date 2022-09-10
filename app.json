@@ -1,15 +1,17 @@
 {
   "expo": {
-    "name": "client",
-    "slug": "client",
+    "name": "expo-test",
+    "slug": "safe-travels",
+    "owner": "mdom",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "scheme": "safetravels",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#222831"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
