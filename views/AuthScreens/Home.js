@@ -1,11 +1,14 @@
 // import { DatePicker } from '../../components';
 import { View, Text, Button, StyleSheet } from 'react-native';
-import { Carousel } from '../../components';
+import { Carousel, SearchBar } from '../../components';
+
 const Home = ({ navigation }) => {
 
   return (
     <View style={style.container}>
-      <Text style={style.container}></Text>
+      <Text style={style.H2}>Hello!</Text>
+      <Text style={style.H4}>It's dangerous out there. Here take this!</Text>
+      <SearchBar icon="magnify" placeholder="Search for a trip" />
       <Text style={style.H2}>Scheduled Trips</Text>
       <Carousel/>
     </View>
@@ -23,7 +26,7 @@ const style = StyleSheet.create({
       color: '#ffffff',
       fontFamily: 'CormorantGaramond_700Bold',
       lineHeight: 49,
-      marginTop: 43,
+      marginTop: 15,
   },
   H3: {
       fontSize: 20,
@@ -36,7 +39,7 @@ const style = StyleSheet.create({
       color: '#C5C8CF',
       fontFamily: 'Roboto_400Regular',
       lineHeight: 26,
-      marginTop: 44,
+
   },
   container: {
       height: '100%',

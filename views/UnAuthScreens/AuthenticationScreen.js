@@ -1,14 +1,35 @@
-import {View, Text, StyleSheet} from 'react-native';
+import { StyleSheet, TextInput, Text, TouchableOpacity, View } from 'react-native';
+import { BackArrow } from '../../assets/SVG';
 
-
-export default function ContactsScreen() {
+const AuthenticationScreen = ({navigation}) => {
   return (
-    <View style={style.container}>
-      <Text>THIS IS THE CONTACTS SCREEN</Text>
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.backArrow} onPress={() => navigation.navigate('SignUp')}>
+        <BackArrow/>
+      </TouchableOpacity>
+
+      <Text style={styles.H2}>Confirm your number</Text>
+
+      <View style={styles.inputContainer}>
+        <View style={styles.inputContainer.area}>
+          <TextInput style={styles.inputContainer.flag} placeholder='🇺🇸'></TextInput>
+        </View>
+
+        <View style={styles.inputContainer.number}>
+          <TextInput style={styles.inputContainer.H4} placeholder='Phone Number' placeholderTextColor='#C5C8CF'></TextInput>
+        </View>
+      </View>
+
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Password")}>
+          <Text style={styles.button.H3}>Continue</Text>
+      </TouchableOpacity>
+
+      <Text style={styles.H4}>By proceding, you acknowledge that you will be recieving SMS messages from safe travels and affiliates to the number provided. </Text>
     </View>
   )
 }
-const style = StyleSheet.create({
+
+const styles = StyleSheet.create({
   H1: {
     fontSize: 42,
     color: '#ffffff',
@@ -20,7 +41,7 @@ const style = StyleSheet.create({
       color: '#ffffff',
       fontFamily: 'CormorantGaramond_700Bold',
       lineHeight: 49,
-      marginTop: 15,
+      marginTop: 43,
   },
   H3: {
       fontSize: 20,
@@ -33,7 +54,7 @@ const style = StyleSheet.create({
       color: '#C5C8CF',
       fontFamily: 'Roboto_400Regular',
       lineHeight: 26,
-
+      marginTop: 44,
   },
   container: {
       height: '100%',
@@ -88,3 +109,5 @@ const style = StyleSheet.create({
     }
   }
 });
+
+export default AuthenticationScreen;
