@@ -40,6 +40,7 @@ const Carousel = ({image, color}) => {
         height: 300,
         padding: 50,
         width: 250,
+        overflow: false,
       }}
     >
       {image && <Image source={{uri: image }} style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0}}/>}
