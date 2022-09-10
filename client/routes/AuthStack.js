@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 //import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'; !!!!!!! NPM UNINSTALL!!!!!!!!!!!!
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/Feather';
+import FeatherIcons from 'react-native-vector-icons/Feather';
 import { StyleSheet, Text } from 'react-native';
 
 import { AppleLogo, FacebookLogo, GithubLogo, GoogleLogo } from '../assets/SVG';
@@ -76,7 +76,7 @@ const AuthStack = () => {
         <Tabs.Screen
           options={{
             headerShown: false,
-            tabBarIcon: ({focused, color}) => (<MaterialCommunityIcons name="home" color={color} size={20}/>),
+            tabBarIcon: ({focused, color}) => (<FeatherIcons name="home" color={color} size={20}/>),
             tabBarColor: "#393E46",
             tabBarLabel: <Text style={{fontSize: 8, marginTop: 100}}>Home</Text>
 
@@ -87,7 +87,7 @@ const AuthStack = () => {
         <Tabs.Screen
           options={{
             headerShown: false,
-            tabBarIcon: ({focused, color}) => (<MaterialCommunityIcons name="users" color={color} size={20}/>),
+            tabBarIcon: ({focused, color}) => (<FeatherIcons name="users" color={color} size={20}/>),
             tabBarColor: "#393E46",
             tabBarLabel: <Text style={{fontSize: 8, paddingTop: 10, left: 50}}>Contacts</Text>
           }}
@@ -97,7 +97,7 @@ const AuthStack = () => {
         <Tabs.Screen
           options={{
             headerShown: false,
-            tabBarIcon: ({focused, color}) => (<MaterialCommunityIcons name="map-pin" color={color} size={20}/>),
+            tabBarIcon: ({focused, color}) => (<FeatherIcons name="map-pin" color={color} size={20}/>),
             tabBarColor: "#393E46",
             tabBarLabel: <Text style={{fontSize: 8, paddingTop: 10, left: 50}}>Travel</Text>
           }}
@@ -107,7 +107,7 @@ const AuthStack = () => {
         <Tabs.Screen
           options={{
             headerShown: false,
-            tabBarIcon: ({focused, color}) => (<MaterialCommunityIcons name="watch" color={color} size={20}/>),
+            tabBarIcon: ({focused, color}) => (<FeatherIcons name="watch" color={color} size={20}/>),
             tabBarColor: "#393E46",
             tabBarLabel: <Text style={{fontSize: 8, paddingTop: 10, left: 50}}>Timers</Text>
           }}
@@ -117,7 +117,7 @@ const AuthStack = () => {
         <Tabs.Screen
           options={{
             headerShown: false,
-            tabBarIcon: ({focused, color}) => (<MaterialCommunityIcons name="user" color={color} size={20}/>),
+            tabBarIcon: ({focused, color}) => (<FeatherIcons name="user" color={color} size={20}/>),
             tabBarColor: "#393E46",
             tabBarLabel: <Text style={{fontSize: 8, paddingTop: 10, left: 50}}>Profile</Text>
           }}

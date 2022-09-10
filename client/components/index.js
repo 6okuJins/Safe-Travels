@@ -6,3 +6,4 @@ export { default as GoogleAuth } from './authentication/GoogleAuth';
 export { default as Carousel } from './Carousel';
 export { default as SearchBar } from './SearchBar';
 export { default as ImagePickerButton } from './ImagePickerButton';
+export { default as PlusButton } from './PlusButton';
