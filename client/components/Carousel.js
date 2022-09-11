@@ -55,7 +55,7 @@ const Carousel = ({carouselItems, openTrip}) => {
         borderRadius: 20,
         paddingHorizontal: 15,
       }}>
-        <Text style={{color: 'white', fontSize: 30 }}>{item.destination}</Text>
+        <Text style={{color: 'white', fontSize: 16, fontFamily: 'Roboto_400Regular'}}>{item.destination}</Text>
       </View>
     </TouchableOpacity>
   ), [carouselItems]);

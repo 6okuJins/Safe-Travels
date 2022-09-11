@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet, Button } from 'react-native';
+import { ImageBackground, View, Text, StyleSheet, Button } from 'react-native';
 import { ImagePickerButton, Carousel } from '../../components';
 import { useState, useEffect } from 'react';
 
@@ -14,14 +14,16 @@ export default function TravelScreen() {
   const [ color, setColor ] = useState();
 
   return (
-    <View style={style.container}>
+    <ImageBackground source={require('../../assets/travel-screen.png')} resizeMode="cover" style={style.background}>
+    {/* <View style={style.container}>
       <Text>TRAVEL</Text>
       <Carousel carouselItems={example}/>
       <ImagePickerButton setImage={setImage}/>
       <Button
       title='Change color'
       onPress={() => setColor('blue')}/>
-    </View>
+    </View> */}
+    </ImageBackground>
   )
 }
 const style = StyleSheet.create({
@@ -102,5 +104,10 @@ const style = StyleSheet.create({
       marginRight: 'auto',
       top: 9
     }
+  },
+  background: {
+    width: '100%', 
+    height: '100%',
+    flex: 1
   }
 });
