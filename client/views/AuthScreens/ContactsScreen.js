@@ -1,11 +1,13 @@
-import {View, Text, StyleSheet} from 'react-native';
+import { ImageBackground, View, Text, StyleSheet } from 'react-native';
 
 
 export default function ContactsScreen() {
   return (
-    <View style={style.container}>
-      <Text>THIS IS THE CONTACTS SCREEN</Text>
-    </View>
+    <ImageBackground source={require('../../assets/contact-screen.png')} resizeMode="cover" style={style.background}>
+      {/* <View style={style.container}>
+        <Text>THIS IS THE CONTACTS SCREEN</Text>
+      </View> */}
+    </ImageBackground>
   )
 }
 const style = StyleSheet.create({
@@ -86,5 +88,10 @@ const style = StyleSheet.create({
       marginRight: 'auto',
       top: 9
     }
+  },    
+  background: {
+    width: '100%', 
+    height: '100%',
+    flex: 1
   }
 });
