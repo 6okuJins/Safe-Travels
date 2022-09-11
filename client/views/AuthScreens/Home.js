@@ -2,6 +2,7 @@
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { Carousel, SearchBar, PlusButton, AddTripModal} from '../../components';
 import { useState } from 'react';
+import { TravelBuddies } from '../../assets/SVG'
 
 const Home = ({ navigation }) => {
   const [ trips, setTrips ] = useState([]);
@@ -21,6 +22,8 @@ const Home = ({ navigation }) => {
         <PlusButton onPress={()=> setModalOpen(true)}/>
       </View>
       <Carousel carouselItems={trips} openTrip={openTrip}/>
+      <Text style={style.H2}>Travel Buddies</Text>
+      <TravelBuddies style={style.friends}/>
       <AddTripModal ModalOpen={ModalOpen} setModalOpen={setModalOpen} setTrips={setTrips}/>
     </View>
   )
@@ -37,6 +40,7 @@ const style = StyleSheet.create({
       color: '#ffffff',
       fontFamily: 'CormorantGaramond_700Bold',
       lineHeight: 49,
+      marginTop: 13
   },
   H3: {
       fontSize: 20,
@@ -102,6 +106,9 @@ const style = StyleSheet.create({
       marginRight: 'auto',
       top: 9
     }
+  },
+  friends: {
+    marginTop: 13
   }
 });
 export default Home;
