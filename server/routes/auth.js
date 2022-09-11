@@ -8,6 +8,7 @@ const twilioPhoneNumber = process.env.TWILIO_PHONE_NUMBER;
 const client = require('twilio')(accountSid, authToken);
 
 let confirmationHash = {};
+let scheduleHash = {};
 
 router.post("/api/authentication", (req, res, next) => {
     console.log('/api/authentication')
@@ -53,6 +54,18 @@ router.post("/api/login", (req, res, next) => {
         res.status(403).json({success: false})
     }
 });
+
+router.post("/api/schedule", (req, res, next) => {
+    console.log('/api/schedule')
+    console.log(req.body)
+
+    scheduleHash[req.body.phoneNumber] = {}
+
+    scheduleHash[req.body.phoneNumber]['location'] = req.body.location
+    scheduleHash[req.body.phoneNumber]['buddy'] = req.body.buddy
+
+    res.status(200).json({success: true});
+})
 
 
 module.exports = router;
