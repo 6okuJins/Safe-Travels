@@ -26,14 +26,14 @@ import SnapCarousel from 'react-native-snap-carousel';
 //   },
 // ];
 
-const Carousel = ({carouselItems}) => {
+const Carousel = ({carouselItems, openTrip}) => {
   const [activeIndex, setActiveIndex] = useState(0);
   //const [carouselItems, setCarouselItems] = useState(exampleItems);
   const ref = useRef(null);
 
   const renderItem = useCallback(({ item, index }) => (
     <TouchableOpacity
-      onPress={()=> console.log('carousel item pressed')}
+      onPress={()=> openTrip(index, carouselItems)}
       style={{
         justifyContent: 'space-between',
         alignItems: 'flex-start',

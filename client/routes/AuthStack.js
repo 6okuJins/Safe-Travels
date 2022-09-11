@@ -10,7 +10,7 @@ import { Home,
   ContactsScreen,
   TimersScreen,
   TravelScreen,
-  TripsScreen, } from '../views';
+  TripScreen, } from '../views';
 import Svg from 'react-native-svg';
 
 
@@ -21,7 +21,7 @@ const AuthStack = () => {
     return (
       <Stack.Navigator>
         <Stack.Screen options={{headerShown: false}} name="HomeScreen" component={Home}></Stack.Screen>
-        <Stack.Screen options={{headerShown: false}} name="TripsScreen" component={TripsScreen}></Stack.Screen>
+        <Stack.Screen options={{headerShown: false}} name="TripScreen" component={TripScreen}></Stack.Screen>
       </Stack.Navigator>
     )
   }

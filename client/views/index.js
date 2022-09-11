@@ -7,7 +7,7 @@ export { default as SetLocaleScreen } from './UnAuthScreens/SetLocaleScreen';
 
 // Auth Screens: 
 export { default as Home } from './AuthScreens/Home';
-export { default as TripsScreen } from './AuthScreens/TripsScreen';
+export { default as TripScreen } from './AuthScreens/TripScreen';
 export { default as ContactsScreen } from './AuthScreens/ContactsScreen';
 export { default as TravelScreen } from './AuthScreens/TravelScreen';
 export { default as TimersScreen} from './AuthScreens/TimersScreen';

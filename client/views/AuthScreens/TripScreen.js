@@ -1,9 +1,22 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Button, Image} from 'react-native';
 
-export default function TripsScreen() {
+export default function TripScreen({navigation, route}) {
+  const { 
+    image,
+    startLocation,
+    destination,
+    endDate
+    } = route.params;
   return (
     <View style={style.container}>
-      <Text>TRIPS</Text>
+      <Image
+        uri={image} />
+      <Button
+        title='Back'
+        onPress={() => navigation.goBack()} />
+      <Text>TRIP</Text>
+      <Text>{destination}</Text>
+
     </View>
   )
 }
