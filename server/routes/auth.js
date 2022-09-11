@@ -4,6 +4,7 @@ const User = require('../models/user');
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
+const twilioPhoneNumber = process.env.TWILIO_PHONE_NUMBER;
 const client = require('twilio')(accountSid, authToken);
 
 let confirmationHash = {};
@@ -22,7 +23,7 @@ router.post("/api/authentication", (req, res, next) => {
     client.messages
     .create({
         body: `Your verification code for Safe Travels is ${password}. Never share this code with anyone.`,
-        from: '+18155510832',
+        from: `${twilioPhoneNumber}`,
         to: `+1${req.body.phoneNumber}`
     })
     .then(message => {

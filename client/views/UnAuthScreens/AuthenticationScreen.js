@@ -38,7 +38,8 @@ const AuthenticationScreen = ({navigation, route}) => {
     }
 
     // ie. http://localhost:3001/api/authentication
-    const response = await fetch(API_URL + '/api/authentication', {
+    console.log(`${API_URL}/api/authentication`)
+    const response = await fetch(API_URL +'/api/authentication', {
         method: "POST",
         body: JSON.stringify(data),
         headers: {

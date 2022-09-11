@@ -33,7 +33,7 @@ const PasswordScreen = ({navigation, route}) => {
     }
 
     // ie. http://localhost:3001/api/login
-    const response = await fetch(API_URL + '/api/login', {
+    const response = await fetch(API_URL+'/api/login', {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
