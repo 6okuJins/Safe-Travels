@@ -1,7 +1,7 @@
-import { TabRouter } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { StyleSheet, TextInput, Text, TouchableOpacity, TouchableWithoutFeedback, Keyboard, View } from 'react-native';
 import { BackArrow } from '../../assets/SVG';
+import { API_URL } from "@env";
 
 const AuthenticationScreen = ({navigation, route}) => {
 
@@ -30,6 +30,28 @@ const AuthenticationScreen = ({navigation, route}) => {
 
     return phoneNumber;
   }
+
+  const handleAuthentication = async () => {
+
+    const data = {
+        phoneNumber: userInfo.phoneNumber
+    }
+
+    // ie. http://localhost:3001/api/authentication
+    const response = await fetch(API_URL + '/api/authentication', {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    .then((response) => console.log(response.json()))
+    .catch(error => {
+      console.error(error)
+    })
+
+    // const data = await response.json();
+  };
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -64,7 +86,10 @@ const AuthenticationScreen = ({navigation, route}) => {
           <TouchableOpacity 
             style={styles.button} 
             onPress={() => {
-              userInfo.phoneNumber.length === 10 ? navigation.navigate("Password", {phoneNumber: userInfo.phoneNumber, phoneNumberFormat: userInfo.phoneNumberFormat}) : null
+              if (userInfo.phoneNumber.length === 10) {
+                handleAuthentication()
+                navigation.navigate("Password", {phoneNumber: userInfo.phoneNumber, phoneNumberFormat: userInfo.phoneNumberFormat})
+              }
             }}
             >
               <Text style={styles.button.H3}>Continue</Text>
