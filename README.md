@@ -22,7 +22,7 @@ $ npm run start
 $ git clone https://github.com/6okuJins/Safe-Travels.git
 $ cd server
 $ npm install
-$ npm run start
+$ node app.js
 ```
 
 ## Technologies used
