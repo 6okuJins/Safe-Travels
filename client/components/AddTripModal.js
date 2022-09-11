@@ -57,9 +57,9 @@ export default function AddTripModal({ModalOpen, setModalOpen, setTrips}) {
               <TextInput placeholderTextColor={"#7C808D"} placeholder="Starting Location" style={styles.textInput} value={startLocation} onChangeText={text => setStartLocation(text)} />
               <TextInput placeholderTextColor={"#7C808D"} placeholder="Destination" style={styles.textInput} value={destination} onChangeText={text => setDestination(text)} />
               <ImagePickerButton setImage={setImage} />
-              <View style={styles.button}  onPress={submitHandler}>
-                <Text style={styles.button.H3} title="Submit" onPress={submitHandler} >Submit</Text>
-              </View>
+              <TouchableOpacity style={styles.button}  onPress={submitHandler}>
+                <Text style={styles.button.H3} title="Submit" >Submit</Text>
+              </TouchableOpacity>
             </View>
             {/* FORM END */}
           </TouchableWithoutFeedback>
