@@ -5,4 +5,3 @@ export { default as FacebookLogo } from './FacebookLogo.js';
 export { default as BackArrow } from './BackArrow.js';
 export { default as LogoLarge } from './LogoLarge.js'
 export { default as TravelBuddies } from './TravelBuddies.js';
-export { default as LogoSmall } from './LogoSmall.js'
