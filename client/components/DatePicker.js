@@ -1,52 +1,66 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Dimensions, TouchableOpacity, Platform, StyleSheet, Button, View, Text } from 'react-native';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import Moment from 'react-moment';
+const DatePicker = ({setTimeLeft}) => {
+  const [date, setDate] = useState();
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
-const DatePicker = () => {
-  const [isPickerShow, setIsPickerShow] = useState(false);
-  const [date, setDate] = useState(new Date(Date.now()));
+  useEffect(()=> {
+    const interval = setInterval(() => setTimeLeft(<Moment element={Text} date={date} durationFromNow />), 10000)
+    return () => {
+      clearInterval(interval)
+    }
+  }, [date])
 
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
 
-  const showPicker = () => {
-    setIsPickerShow(true);
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+  const handleConfirm = (date) => {
+    hideDatePicker();
+    setDate(date);
   };
 
   const onChange = (event, value) => {
     setDate(value);
-    if (Platform.OS === 'android') {
-      setIsPickerShow(false);
-    }
   };
 
   return (
-    <TouchableOpacity style={styles.container}>
+    
+    <View style={styles.container}>
       {/* Display the selected date */}
-      <View style={styles.pickedDateContainer}>
-        <Text style={styles.pickedDate}>{date.toLocaleTimeString()}</Text>
-      </View>
 
-      {/* The button that used to trigger the date picker */}
-      {!isPickerShow && (
-        <View style={styles.btnContainer}>
-          <Button title="Show Picker plese" color="purple" onPress={showPicker} />
-        </View>
-      )}
+
+      <TouchableOpacity style={{borderRadius: 10, backgroundColor: 'rgba(255,255,255, 0.3)', padding: 10,}}
+        onPress={showDatePicker}>
+        <Text style={{
+          fontSize: 20,
+          color: 'rgb(255,255,255)',
+          fontFamily: 'Roboto_400Regular',
+          lineHeight: 30
+          }}>
+            {date?.toLocaleDateString()}
+            {date ? "\n": ''}
+            {date?.toLocaleTimeString()}
+            {!date && 'Set Date'}
+            </Text>
+      </TouchableOpacity>
 
       {/* The date picker */}
-      {isPickerShow && (
-        
-        <View style={styles.datePickerWrapper}>
-          <DateTimePicker
+
+        {/* styles.datePickerWrapper */}
+          <DateTimePickerModal
+            isVisible={isDatePickerVisible}
+            mode="datetime"
             value={date}
-            mode={'datetime'}
-            display={Platform.OS === 'ios' ? 'compact' : 'default'}
-            is24Hour={false}
-            onChange={onChange}
-            style={styles.datePicker}
+            onConfirm={handleConfirm}
+            onCancel={hideDatePicker}
           />
-        </View>
-      )}
-    </TouchableOpacity>
+    </View>
   )
 };
 
@@ -58,7 +72,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) / 2,
     borderColor: 'black',
-    backgroundColor: "#00BFFF"
+    backgroundColor: 'rgba(0,0,0,0.8)'
 
   },
   datePickerWrapper: {
@@ -68,6 +82,7 @@ const styles = StyleSheet.create({
 
     alignItems: 'center',
     width: 220,
+    color: 'white'
   }
 });
 export default DatePicker;

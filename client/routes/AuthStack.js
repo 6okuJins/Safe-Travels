@@ -69,7 +69,7 @@ const AuthStack = () => {
           // justifyContent: 'center',
           flexGrow: 1,
           transform: [ {scale: 1.25}],
-          marginBottom: 30
+
 
           
           //...styles.shadow

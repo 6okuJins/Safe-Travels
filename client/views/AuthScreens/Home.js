@@ -13,7 +13,7 @@ const Home = ({ navigation }) => {
   return (
     <View style={style.container}>
       <Text style={style.H2}>Hello!</Text>
-      <Text style={style.H4}>It's dangerous out there. Here take this!</Text>
+      <Text style={[style.H4]}>It's dangerous out there. Here take this!</Text>
       <SearchBar icon="magnify" placeholder="Search for a trip" />
       
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -40,7 +40,6 @@ const style = StyleSheet.create({
       color: '#ffffff',
       fontFamily: 'CormorantGaramond_700Bold',
       lineHeight: 49,
-      marginTop: 13
   },
   H3: {
       fontSize: 20,
@@ -108,7 +107,7 @@ const style = StyleSheet.create({
     }
   },
   friends: {
-    marginTop: 13
+    
   }
 });
 export default Home;
