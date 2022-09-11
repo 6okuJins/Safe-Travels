@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
 import { BackArrow } from '../../assets/SVG';
-
+import { useUpdateUserContext } from '../../contexts';
 const SetLocaleScreen = ({navigation, route}) => {
-
+  const updateUserContext = useUpdateUserContext();
   const [userInfo, setUserInfo] = useState(
     { 
       'phoneNumber': route.params.phoneNumber,
@@ -34,7 +34,8 @@ const SetLocaleScreen = ({navigation, route}) => {
         </View>
       
         <Text style={styles.H4}>Psst, you can disable this feature in your profile.</Text>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button}
+          onPress={() => updateUserContext(true)}>
           <Text style={styles.button.H3}>Continue</Text>
         </TouchableOpacity>
       </View>
