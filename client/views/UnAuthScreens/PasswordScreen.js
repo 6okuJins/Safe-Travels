@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, TextInput, Text, View, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { BackArrow } from '../../assets/SVG';
+import { API_URL } from "@env";
 
 const PasswordScreen = ({navigation, route}) => {
   const [userInfo, setUserInfo] = useState(
@@ -23,6 +24,28 @@ const PasswordScreen = ({navigation, route}) => {
 
     return phoneNumber;
   }
+
+  const handleLogin = async () => {
+
+    const data = {
+        phoneNumber: userInfo.phoneNumber,
+        confirmationCode: userInfo.confirmationCode
+    }
+
+    // ie. http://localhost:3001/api/login
+    const response = await fetch(API_URL + '/api/login', {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json',
+            'mode':'cors',
+        },
+    })
+    .then((response) => response.json().success)
+    .catch(error => {
+      console.error(error)
+    })
+  };
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -48,7 +71,13 @@ const PasswordScreen = ({navigation, route}) => {
 
           <Text style={styles.H3}>I didn't receive a code</Text>
 
-          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SetLocale', {phoneNumber: unformatPhoneNumber(userInfo.phoneNumber), phoneNumberFormat: userInfo.phoneNumberFormat})}>
+          <TouchableOpacity style={styles.button} onPress={() => {
+            if (userInfo.confirmationCode.length === 4) {
+              if (handleLogin()) {
+                navigation.navigate('SetLocale', {phoneNumber: unformatPhoneNumber(userInfo.phoneNumber), phoneNumberFormat: userInfo.phoneNumberFormat})}
+              }
+            }
+          }>
             <Text style={styles.button.H3}>Continue</Text>
           </TouchableOpacity>
         </View>

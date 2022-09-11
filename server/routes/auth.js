@@ -6,18 +6,24 @@ const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
 
-let password = '';
+let confirmationHash = {};
 
 router.post("/api/authentication", (req, res, next) => {
+    console.log('/api/authentication')
+    console.log(req.body)
+
+    // generate four digit code and hash it against phone number
+    let password = ''
     for (let i = 0; i < 4; i++) {
         password += Math.floor(Math.random() * 9);
     };
+    confirmationHash[req.body.phoneNumber] = password
 
     client.messages
     .create({
         body: `Your verification code for Safe Travels is ${password}. Never share this code with anyone.`,
         from: '+18155510832',
-        to: req.query.phone
+        to: `+1${req.body.phoneNumber}`
     })
     .then(message => {
         console.log(message.sid);
@@ -26,18 +32,19 @@ router.post("/api/authentication", (req, res, next) => {
 });
 
 router.post("/api/login", (req, res, next) => {
+    console.log('/api/login')
+    console.log(req.body)
 
-    console.log(req.query)
-
-    if (req.query.password === password) {
+    if (req.body.confirmationCode === confirmationHash[req.body.phoneNumber]) {
+        console.log('password correct')
         const user = new User({
-            phone: req.query.phone,
+            phone: req.body.phoneNumber,
         }).save(err => {
             if (err) {
                 console.log(err)
                 return next(err)
             }
-            // console.log('successfully added to DB?')
+            console.log('successfully added phone number to DB')
             res.status(200).json({success: true})
         });
     } else {
